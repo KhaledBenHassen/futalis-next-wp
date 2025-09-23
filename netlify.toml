@@ -7,6 +7,10 @@
 
 [build.environment]
   NEXT_USE_NETLIFY_EDGE = "true"
+  # Add your environment variables here for the build process
+  WORDPRESS_URL = "https://futalis24.de"
+  WORDPRESS_HOSTNAME = "futalis24.de"
+  WORDPRESS_WEBHOOK_SECRET = "your-secret-key-here"
 
 [[redirects]]
   from = "/admin"
