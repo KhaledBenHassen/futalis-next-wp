@@ -285,17 +285,56 @@ export async function getPageBySlug(slug: string): Promise<Page> {
 }
 
 export async function getAllAuthors(): Promise<Author[]> {
-  return wordpressFetch<Author[]>("/wp-json/wp/v2/users");
+  try {
+    return await wordpressFetch<Author[]>("/wp-json/wp/v2/users");
+  } catch (error: any) {
+    // If the users endpoint requires authentication (401), return empty array
+    // Many WordPress sites restrict access to the users endpoint for security
+    if (error?.status === 401) {
+      console.warn("Users endpoint requires authentication, returning empty array");
+      return [];
+    }
+    throw error;
+  }
 }
 
 export async function getAuthorById(id: number): Promise<Author> {
-  return wordpressFetch<Author>(`/wp-json/wp/v2/users/${id}`);
+  try {
+    return await wordpressFetch<Author>(`/wp-json/wp/v2/users/${id}`);
+  } catch (error: any) {
+    if (error?.status === 401) {
+      // Return a placeholder author for restricted access
+      return {
+        id,
+        name: "Author",
+        slug: `author-${id}`,
+        description: "",
+        link: "",
+        avatar_urls: {},
+      } as Author;
+    }
+    throw error;
+  }
 }
 
 export async function getAuthorBySlug(slug: string): Promise<Author> {
-  return wordpressFetch<Author[]>("/wp-json/wp/v2/users", { slug }).then(
-    (users) => users[0]
-  );
+  try {
+    const users = await wordpressFetch<Author[]>("/wp-json/wp/v2/users", { slug });
+    return users[0];
+  } catch (error: any) {
+    if (error?.status === 401) {
+      // Return a placeholder author for restricted access
+      return {
+        id: 0,
+        name: "Author",
+        slug,
+        description: "",
+        link: "",
+        avatar_urls: {},
+      } as Author;
+    }
+    throw error;
+  }
 }
 
 export async function getPostsByAuthor(authorId: number): Promise<Post[]> {
@@ -342,10 +381,18 @@ export async function searchTags(query: string): Promise<Tag[]> {
 }
 
 export async function searchAuthors(query: string): Promise<Author[]> {
-  return wordpressFetch<Author[]>("/wp-json/wp/v2/users", {
-    search: query,
-    per_page: 100,
-  });
+  try {
+    return await wordpressFetch<Author[]>("/wp-json/wp/v2/users", {
+      search: query,
+      per_page: 100,
+    });
+  } catch (error: any) {
+    if (error?.status === 401) {
+      console.warn("Users endpoint requires authentication for search, returning empty array");
+      return [];
+    }
+    throw error;
+  }
 }
 
 // Function specifically for generateStaticParams - fetches ALL posts

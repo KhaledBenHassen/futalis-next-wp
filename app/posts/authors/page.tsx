@@ -20,13 +20,17 @@ export default async function Page() {
       <Container className="space-y-6">
         <Prose className="mb-8">
           <h2>All Authors</h2>
-          <ul className="grid">
-            {authors.map((author: any) => (
-              <li key={author.id}>
-                <Link href={`/posts/?author=${author.id}`}>{author.name}</Link>
-              </li>
-            ))}
-          </ul>
+          {authors.length > 0 ? (
+            <ul className="grid">
+              {authors.map((author: any) => (
+                <li key={author.id}>
+                  <Link href={`/posts/?author=${author.id}`}>{author.name}</Link>
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <p>Authors list is not available at this time.</p>
+          )}
         </Prose>
         <BackButton />
       </Container>
