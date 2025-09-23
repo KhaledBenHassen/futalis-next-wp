@@ -1,0 +1,15 @@
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
+
+[build]
+  command = "npm run build"
+  publish = ".next"
+
+[build.environment]
+  NEXT_USE_NETLIFY_EDGE = "true"
+
+[[redirects]]
+  from = "/admin"
+  to = "https://futalis24.de/wp-admin"
+  status = 301
+  force = true
