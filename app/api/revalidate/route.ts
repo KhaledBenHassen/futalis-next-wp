@@ -11,7 +11,10 @@ export const maxDuration = 30;
 
 export async function POST(request: NextRequest) {
   const timestamp = new Date().toISOString();
-  console.log(`🔄 [${timestamp}] Webhook received from ${request.ip || 'unknown IP'}`);
+  const clientIP = request.headers.get('x-forwarded-for') ||
+                   request.headers.get('x-real-ip') ||
+                   'unknown IP';
+  console.log(`🔄 [${timestamp}] Webhook received from ${clientIP}`);
 
   try {
     // Log headers for debugging
