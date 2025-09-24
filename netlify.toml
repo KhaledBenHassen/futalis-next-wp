@@ -10,7 +10,7 @@
   # Add your environment variables here for the build process
   WORDPRESS_URL = "https://futalis24.de"
   WORDPRESS_HOSTNAME = "futalis24.de"
-  WORDPRESS_WEBHOOK_SECRET = "your-secret-key-here"
+  WORDPRESS_WEBHOOK_SECRET = "L8v3kPc9TdSxK4H2N5pQw7mR1bYgZfEaV6jXuAiFnJo="
 
 [[redirects]]
   from = "/admin"
