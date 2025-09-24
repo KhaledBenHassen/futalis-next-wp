@@ -75,11 +75,12 @@ export default async function Page({
     ? await getFeaturedMediaById(post.featured_media)
     : null;
   const author = await getAuthorById(post.author);
-  const date = new Date(post.date).toLocaleDateString("en-US", {
+  const date = new Intl.DateTimeFormat("en-US", {
     month: "long",
     day: "numeric",
     year: "numeric",
-  });
+    timeZone: "UTC", // Force UTC to ensure consistency
+  }).format(new Date(post.date));
   const category = await getCategoryById(post.categories[0]);
 
   return (

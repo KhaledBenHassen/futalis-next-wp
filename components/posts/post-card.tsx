@@ -15,11 +15,12 @@ export async function PostCard({ post }: { post: Post }) {
     ? await getFeaturedMediaById(post.featured_media)
     : null;
   const author = post.author ? await getAuthorById(post.author) : null;
-  const date = new Date(post.date).toLocaleDateString("en-US", {
+  const date = new Intl.DateTimeFormat("en-US", {
     month: "long",
     day: "numeric",
     year: "numeric",
-  });
+    timeZone: "UTC", // Force UTC to ensure consistency
+  }).format(new Date(post.date));
   const category = post.categories?.[0]
     ? await getCategoryById(post.categories[0])
     : null;
