@@ -8,6 +8,9 @@ importers:
 
   .:
     dependencies:
+      '@futalis-it/shared-components':
+        specifier: ^0.0.2
+        version: 0.0.2
       '@hookform/resolvers':
         specifier: ^3.10.0
         version: 3.10.0(react-hook-form@7.58.1(react@19.1.0))
@@ -183,6 +186,9 @@ packages:
 
   '@floating-ui/utils@0.2.9':
     resolution: {integrity: sha512-MDWhGtE+eHw5JW7lq4qhc5yRLS11ERl1c7Z6Xd0a58DozHES6EnNNwUWbMiG4J9Cgj053Bhk8zvlhFYKVhULwg==}
+
+  '@futalis-it/shared-components@0.0.2':
+    resolution: {integrity: sha512-b3siLefRPLzFrIfbolT3AVJNcLbU6ctvcubrH2uhUHpAMPxLDe1e6BQKMCghyVBZ0jl+0ncL+EPq17/nSk6L8Q==, tarball: https://npm.pkg.github.com/download/@futalis-it/shared-components/0.0.2/2865c7fdacbd51ddc96e3deae8e0ad5ac158e295}
 
   '@hookform/resolvers@3.10.0':
     resolution: {integrity: sha512-79Dv+3mDF7i+2ajj7SkypSKHhl1cbln1OGavqrsF7p6mbUv11xpqpacPsGDCTRvCSjEEIez2ef1NveSVL3b0Ag==}
@@ -2577,6 +2583,8 @@ snapshots:
       react-dom: 19.1.0(react@19.1.0)
 
   '@floating-ui/utils@0.2.9': {}
+
+  '@futalis-it/shared-components@0.0.2': {}
 
   '@hookform/resolvers@3.10.0(react-hook-form@7.58.1(react@19.1.0))':
     dependencies:
